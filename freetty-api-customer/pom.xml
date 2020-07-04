@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.freetty</groupId>
+		<artifactId>freetty</artifactId>
+		<version>1.0</version>
+	</parent>
+	<artifactId>freetty-api-customer</artifactId>
+	<packaging>war</packaging>
+	<properties>
+		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+		<beanstalk.versionLabel>${maven.build.timestamp}</beanstalk.versionLabel>
+	</properties>
+	<dependencies>
+
+		<!-- Project modules -->
+		<dependency>
+			<groupId>com.freetty</groupId>
+			<artifactId>freetty-core</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<!-- Spring Boot dependencies -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.mobile</groupId>
+			<artifactId>spring-mobile-device</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.ingenieux</groupId>
+			<artifactId>beanstalk-maven-plugin</artifactId>
+			<version>1.5.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-nop</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- manven remote build dev server -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://api.freetty.com/manager/text</url>
+					<path>/api-customer</path>
+					<username>admin</username>
+					<password>vmflxl00!!</password>
+					<update>true</update>
+					<skipTests>true</skipTests>
+					<!-- <source>1.8</source> -->
+					<!-- <target>1.8</target> -->
+					<!-- <encoding>UTF-8</encoding> -->
+				</configuration>
+			</plugin>
+			<!-- Spring Boot plugins -->
+			<!-- 실행할 수 있는 jar파일을 만들기 위한 플러그인 -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- <configuration> -->
+				<!-- <source>1.8</source> -->
+				<!-- <target>1.8</target> -->
+				<!-- <encoding>UTF-8</encoding> -->
+				<!-- </configuration> -->
+			</plugin>
+		</plugins>
+	</build>
+</project>
